@@ -1,14 +1,16 @@
 """AgentAnycast MCP Server — P2P agent networking for AI tools.
 
-Exposes the AgentAnycast peer-to-peer network as MCP tools so that any
-MCP-compatible AI assistant (Claude Desktop, Cursor, VS Code, Gemini CLI,
-ChatGPT, etc.) can discover agents, send encrypted tasks, and query the
-network — zero config, zero API keys.
+Two modes of operation:
 
-Quick start::
+**Server mode** (default) — exposes the P2P network as MCP tools::
 
     uvx agentanycast-mcp          # stdio (Claude Desktop, Cursor, VS Code)
-    agentanycast-mcp              # same, if installed via pip
+    agentanycast-mcp --transport http  # HTTP (ChatGPT, remote)
+
+**Proxy mode** — wraps any MCP server and makes it P2P-reachable::
+
+    agentanycast-mcp --wrap "uvx mcp-server-filesystem"
+    agentanycast-mcp --wrap "python -m my_server" --relay "/ip4/.../p2p/..."
 
 Configuration via environment variables::
 
@@ -19,13 +21,14 @@ Configuration via environment variables::
 from __future__ import annotations
 
 import argparse
+import asyncio
 
 
 def main(argv: list[str] | None = None) -> None:
     """Entry point for ``agentanycast-mcp`` / ``uvx agentanycast-mcp``.
 
     Reads configuration from CLI arguments and environment variables,
-    then starts the MCP server.
+    then starts the MCP server or proxy.
     """
     parser = argparse.ArgumentParser(
         prog="agentanycast-mcp",
@@ -37,7 +40,7 @@ def main(argv: list[str] | None = None) -> None:
         default="stdio",
         help=(
             "Transport mode: stdio (default, for Claude Desktop/Cursor)"
-            " or http (for ChatGPT/remote)"
+            " or http (for ChatGPT/remote). Ignored in --wrap mode."
         ),
     )
     parser.add_argument(
@@ -56,16 +59,32 @@ def main(argv: list[str] | None = None) -> None:
         default=None,
         help="Data directory for daemon state (overrides AGENTANYCAST_HOME env var)",
     )
+    parser.add_argument(
+        "--wrap",
+        default=None,
+        metavar="COMMAND",
+        help=(
+            "Proxy mode: wrap an existing MCP server and expose it on the P2P network. "
+            'Example: --wrap "uvx mcp-server-filesystem"'
+        ),
+    )
     args = parser.parse_args(argv)
 
-    # Import here so startup errors are caught after arg parsing
-    from agentanycast.mcp_server import configure, run_server
+    if args.wrap:
+        # Proxy mode — wrap an external MCP server.
+        from agentanycast_mcp.proxy import run_proxy
 
-    # CLI args take priority over env vars (env vars are read inside
-    # mcp_server._get_node via _resolve_config)
-    if args.relay:
-        configure(relay=args.relay, home=args.home)
-    elif args.home:
-        configure(home=args.home)
+        try:
+            asyncio.run(run_proxy(args.wrap, relay=args.relay, home=args.home))
+        except KeyboardInterrupt:
+            print("\nProxy stopped.")
+    else:
+        # Server mode — expose P2P network as MCP tools.
+        from agentanycast.mcp_server import configure, run_server
 
-    run_server(transport=args.transport, port=args.port)
+        if args.relay:
+            configure(relay=args.relay, home=args.home)
+        elif args.home:
+            configure(home=args.home)
+
+        run_server(transport=args.transport, port=args.port)
