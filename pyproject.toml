@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "agentanycast-mcp"
-version = "0.7.1"
+version = "0.7.2"
 description = "MCP server for P2P agent networking — discover and talk to AI agents anywhere, encrypted, zero config"
 readme = "README.md"
 license = {text = "Apache-2.0"}
