@@ -34,6 +34,12 @@ dependencies = [
     "mcp>=1.2",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.8",
+]
+
 [project.urls]
 Homepage = "https://github.com/AgentAnycast/agentanycast-mcp"
 Repository = "https://github.com/AgentAnycast/agentanycast-mcp"
@@ -44,3 +50,13 @@ agentanycast-mcp = "agentanycast_mcp:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/agentanycast_mcp"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

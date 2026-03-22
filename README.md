@@ -137,6 +137,73 @@ Add to `~/.aws/amazonq/mcp.json`:
 }
 ```
 
+### Cline
+
+Add to Cline MCP settings (VS Code: `Ctrl+Shift+P` → "Cline: MCP Servers"):
+
+```json
+{
+  "mcpServers": {
+    "agentanycast": {
+      "command": "uvx",
+      "args": ["agentanycast-mcp"]
+    }
+  }
+}
+```
+
+### Continue
+
+Add to `~/.continue/config.json`:
+
+```json
+{
+  "experimental": {
+    "modelContextProtocolServers": [
+      {
+        "transport": {
+          "type": "stdio",
+          "command": "uvx",
+          "args": ["agentanycast-mcp"]
+        }
+      }
+    ]
+  }
+}
+```
+
+### Zed
+
+Add to Zed settings (`~/.config/zed/settings.json`):
+
+```json
+{
+  "context_servers": {
+    "agentanycast": {
+      "command": {
+        "path": "uvx",
+        "args": ["agentanycast-mcp"]
+      }
+    }
+  }
+}
+```
+
+### Roo Code
+
+Add to Roo Code MCP settings (VS Code: `Ctrl+Shift+P` → "Roo Code: MCP Servers"):
+
+```json
+{
+  "mcpServers": {
+    "agentanycast": {
+      "command": "uvx",
+      "args": ["agentanycast-mcp"]
+    }
+  }
+}
+```
+
 ### ChatGPT (requires HTTP mode)
 
 Deploy the server remotely with HTTP transport:
