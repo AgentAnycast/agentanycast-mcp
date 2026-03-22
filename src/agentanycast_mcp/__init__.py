@@ -19,8 +19,6 @@ Configuration via environment variables::
 from __future__ import annotations
 
 import argparse
-import os
-import sys
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -37,13 +35,16 @@ def main(argv: list[str] | None = None) -> None:
         "--transport",
         choices=["stdio", "http"],
         default="stdio",
-        help="Transport mode: stdio (default, for Claude Desktop/Cursor) or http (for ChatGPT/remote)",
+        help=(
+            "Transport mode: stdio (default, for Claude Desktop/Cursor)"
+            " or http (for ChatGPT/remote)"
+        ),
     )
     parser.add_argument(
         "--port",
         type=int,
         default=8080,
-        help="HTTP port (only used with --transport http, default: 8080)",
+        help="HTTP port (only with --transport http, default: 8080)",
     )
     parser.add_argument(
         "--relay",
