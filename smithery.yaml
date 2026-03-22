@@ -1,0 +1,16 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      relay:
+        type: string
+        description: "Relay server multiaddr for cross-network P2P communication (optional — omit for LAN-only mode)"
+    required: []
+  commandFunction: |
+    (config) => ({
+      command: "uvx",
+      args: ["agentanycast-mcp"],
+      env: config.relay ? { AGENTANYCAST_RELAY: config.relay } : {}
+    })
+  exampleConfig: {}

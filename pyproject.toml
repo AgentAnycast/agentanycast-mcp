@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling>=1.21,<1.22"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agentanycast-mcp"
+version = "0.7.1"
+description = "MCP server for P2P agent networking — discover and talk to AI agents anywhere, encrypted, zero config"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+authors = [
+    { name = "AgentAnycast Contributors" },
+]
+keywords = [
+    "mcp", "mcp-server", "a2a", "a2a-protocol", "p2p", "agent", "ai-agent",
+    "agent-networking", "encrypted", "nat-traversal", "zero-config",
+    "decentralized", "peer-to-peer", "libp2p", "noise-protocol", "did",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: System :: Networking",
+]
+dependencies = [
+    "agentanycast>=0.7",
+    "mcp>=1.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/AgentAnycast/agentanycast-mcp"
+Repository = "https://github.com/AgentAnycast/agentanycast-mcp"
+Issues = "https://github.com/AgentAnycast/agentanycast/issues"
+
+[project.scripts]
+agentanycast-mcp = "agentanycast_mcp:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agentanycast_mcp"]

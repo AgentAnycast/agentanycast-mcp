@@ -1,0 +1,37 @@
+# AgentAnycast MCP Server
+
+> MCP server for peer-to-peer AI agent networking. Connects any MCP-compatible AI tool to a decentralized network of AI agents with end-to-end encryption, NAT traversal, and skill-based routing.
+
+## What it does
+
+AgentAnycast MCP Server exposes 6 tools that let AI assistants (Claude, Cursor, VS Code, ChatGPT, Gemini CLI, etc.) discover and communicate with AI agents on a P2P network:
+
+- `discover_agents(skill)` — Find agents by capability (e.g. "translate", "summarize")
+- `send_task(target, message)` — Send encrypted task to agent (by PeerID, skill name, or URL)
+- `get_task_status(task_id)` — Check task result
+- `get_agent_card(peer_id)` — Get agent's capability card
+- `list_connected_peers()` — List connected peers
+- `get_node_info()` — Node identity and status
+
+## Key features
+
+- Zero config: `uvx agentanycast-mcp` — daemon auto-managed
+- Zero API keys: Cryptographic identity (Ed25519 → did:key)
+- End-to-end encrypted: Noise_XX through relays
+- NAT traversal: Automatic hole-punching + relay fallback
+- Skill-based routing: Send to "translate" not to an address
+- Decentralized: No central server required
+
+## Install
+
+```
+uvx agentanycast-mcp          # stdio mode
+pip install agentanycast-mcp   # or install globally
+```
+
+## Links
+
+- Source: https://github.com/AgentAnycast/agentanycast-mcp
+- Main project: https://github.com/AgentAnycast/agentanycast
+- Python SDK: https://github.com/AgentAnycast/agentanycast-python
+- TypeScript SDK: https://github.com/AgentAnycast/agentanycast-ts

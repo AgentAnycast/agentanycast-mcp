@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# AgentAnycast MCP Server — npm wrapper
+# Delegates to the Python package via uvx (preferred) or pipx (fallback).
+
+set -euo pipefail
+
+if command -v uvx &>/dev/null; then
+  exec uvx agentanycast-mcp "$@"
+elif command -v pipx &>/dev/null; then
+  exec pipx run agentanycast-mcp "$@"
+else
+  echo "Error: agentanycast-mcp requires 'uvx' (recommended) or 'pipx'." >&2
+  echo "" >&2
+  echo "Install uv (includes uvx):" >&2
+  echo "  curl -LsSf https://astral.sh/uv/install.sh | sh" >&2
+  echo "" >&2
+  echo "Or install pipx:" >&2
+  echo "  pip install pipx" >&2
+  exit 1
+fi

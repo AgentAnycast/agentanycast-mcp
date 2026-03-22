@@ -1,0 +1,30 @@
+{
+  "name": "agentanycast-mcp",
+  "version": "0.7.1",
+  "description": "MCP server for P2P agent networking — discover and talk to AI agents anywhere, encrypted, zero config",
+  "bin": {
+    "agentanycast-mcp": "bin/agentanycast-mcp"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "a2a",
+    "p2p",
+    "agent",
+    "ai-agent",
+    "encrypted",
+    "peer-to-peer",
+    "nat-traversal",
+    "zero-config"
+  ],
+  "homepage": "https://github.com/AgentAnycast/agentanycast-mcp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AgentAnycast/agentanycast-mcp.git"
+  },
+  "license": "Apache-2.0",
+  "files": [
+    "bin/",
+    "README.md"
+  ]
+}
