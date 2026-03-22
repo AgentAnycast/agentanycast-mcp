@@ -1,32 +1,22 @@
 # AgentAnycast MCP Server
 
-**Your AI assistant can now talk to AI agents anywhere in the world. Encrypted. Zero config.**
+**Turn any AI tool into a peer-to-peer agent hub.** Discover, communicate with, and orchestrate AI agents across any network -- encrypted, decentralized, zero config.
 
-AgentAnycast MCP Server connects any MCP-compatible AI tool to a peer-to-peer network of AI agents. Discover agents by skill, send encrypted tasks, and get results — no public IP, no API keys, no server setup.
-
-```bash
-uvx agentanycast-mcp    # That's it. Works with Claude, Cursor, VS Code, Gemini CLI, and more.
-```
-
-## What You Can Do
-
-Once connected, ask your AI assistant things like:
-
-- *"Find agents that can translate Japanese"* → discovers agents on the P2P network
-- *"Send 'summarize this article' to the translate agent"* → encrypted task delivery
-- *"What agents are connected right now?"* → network status
-
-## Install
+[![PyPI](https://img.shields.io/pypi/v/agentanycast-mcp?color=8B5CF6)](https://pypi.org/project/agentanycast-mcp/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue)](LICENSE)
 
 ```bash
-pip install agentanycast-mcp    # or: uvx agentanycast-mcp
+uvx agentanycast-mcp
 ```
 
-> **First run** downloads the AgentAnycast daemon (~20 MB). Subsequent starts take < 3 seconds.
+Works with Claude Desktop, Claude Code, Cursor, VS Code, Windsurf, JetBrains, Gemini CLI, Amazon Q, Cline, Continue, Zed, Roo Code, and ChatGPT.
 
-## Setup by Platform
+## Setup
 
-### Claude Desktop
+Pick your platform and add the config below. That's the entire setup -- the daemon downloads and starts automatically on first run.
+
+<details open>
+<summary><strong>Claude Desktop</strong></summary>
 
 Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
 
@@ -40,14 +30,18 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
   }
 }
 ```
+</details>
 
-### Claude Code
+<details>
+<summary><strong>Claude Code</strong></summary>
 
 ```bash
 claude mcp add agentanycast -- uvx agentanycast-mcp
 ```
+</details>
 
-### Cursor
+<details>
+<summary><strong>Cursor</strong></summary>
 
 Add to `.cursor/mcp.json` in your project root:
 
@@ -61,8 +55,10 @@ Add to `.cursor/mcp.json` in your project root:
   }
 }
 ```
+</details>
 
-### VS Code + Copilot
+<details>
+<summary><strong>VS Code + Copilot</strong></summary>
 
 Add to `.vscode/mcp.json`:
 
@@ -76,8 +72,10 @@ Add to `.vscode/mcp.json`:
   }
 }
 ```
+</details>
 
-### Windsurf
+<details>
+<summary><strong>Windsurf</strong></summary>
 
 Add to `~/.codeium/windsurf/mcp_config.json`:
 
@@ -91,10 +89,12 @@ Add to `~/.codeium/windsurf/mcp_config.json`:
   }
 }
 ```
+</details>
 
-### JetBrains AI
+<details>
+<summary><strong>JetBrains AI</strong></summary>
 
-Settings → Tools → AI → MCP Servers → Add:
+Settings -> Tools -> AI -> MCP Servers -> Add:
 
 ```json
 {
@@ -106,8 +106,10 @@ Settings → Tools → AI → MCP Servers → Add:
   }
 }
 ```
+</details>
 
-### Gemini CLI
+<details>
+<summary><strong>Gemini CLI</strong></summary>
 
 Add to `~/.gemini/settings.json`:
 
@@ -121,8 +123,10 @@ Add to `~/.gemini/settings.json`:
   }
 }
 ```
+</details>
 
-### Amazon Q Developer
+<details>
+<summary><strong>Amazon Q Developer</strong></summary>
 
 Add to `~/.aws/amazonq/mcp.json`:
 
@@ -136,10 +140,12 @@ Add to `~/.aws/amazonq/mcp.json`:
   }
 }
 ```
+</details>
 
-### Cline
+<details>
+<summary><strong>Cline</strong></summary>
 
-Add to Cline MCP settings (VS Code: `Ctrl+Shift+P` → "Cline: MCP Servers"):
+Add to Cline MCP settings (VS Code: `Ctrl+Shift+P` -> "Cline: MCP Servers"):
 
 ```json
 {
@@ -151,8 +157,10 @@ Add to Cline MCP settings (VS Code: `Ctrl+Shift+P` → "Cline: MCP Servers"):
   }
 }
 ```
+</details>
 
-### Continue
+<details>
+<summary><strong>Continue</strong></summary>
 
 Add to `~/.continue/config.json`:
 
@@ -171,8 +179,10 @@ Add to `~/.continue/config.json`:
   }
 }
 ```
+</details>
 
-### Zed
+<details>
+<summary><strong>Zed</strong></summary>
 
 Add to Zed settings (`~/.config/zed/settings.json`):
 
@@ -188,10 +198,12 @@ Add to Zed settings (`~/.config/zed/settings.json`):
   }
 }
 ```
+</details>
 
-### Roo Code
+<details>
+<summary><strong>Roo Code</strong></summary>
 
-Add to Roo Code MCP settings (VS Code: `Ctrl+Shift+P` → "Roo Code: MCP Servers"):
+Add to Roo Code MCP settings (VS Code: `Ctrl+Shift+P` -> "Roo Code: MCP Servers"):
 
 ```json
 {
@@ -203,10 +215,12 @@ Add to Roo Code MCP settings (VS Code: `Ctrl+Shift+P` → "Roo Code: MCP Servers
   }
 }
 ```
+</details>
 
-### ChatGPT (requires HTTP mode)
+<details>
+<summary><strong>ChatGPT (HTTP mode)</strong></summary>
 
-Deploy the server remotely with HTTP transport:
+Deploy the server with HTTP transport:
 
 ```bash
 agentanycast-mcp --transport http --port 8080
@@ -214,6 +228,27 @@ agentanycast-mcp --transport http --port 8080
 ```
 
 Then add `http://your-server:8080/mcp` in ChatGPT developer settings.
+</details>
+
+## What You Can Do
+
+Once connected, ask your AI assistant:
+
+- *"Find agents that can translate Japanese"* -- discovers agents on the P2P network
+- *"Send 'summarize this article' to the translate agent"* -- encrypted task delivery
+- *"What agents are connected right now?"* -- lists connected peers
+- *"What's my Peer ID?"* -- shows your node's identity and DID
+
+## Available Tools
+
+| Tool | Description | Example prompt |
+|------|-------------|----------------|
+| `discover_agents` | Find agents by skill | *"Find agents that can translate"* |
+| `send_task` | Send an encrypted task to an agent | *"Send 'hello' to peer 12D3KooW..."* |
+| `get_task_status` | Check the result of a sent task | *"What was the result of that task?"* |
+| `get_agent_card` | Get an agent's capabilities | *"What can that agent do?"* |
+| `list_connected_peers` | List all connected P2P peers | *"Who's online?"* |
+| `get_node_info` | Get this node's Peer ID, DID, status | *"What's my agent info?"* |
 
 ## Configuration
 
@@ -221,12 +256,12 @@ Then add `http://your-server:8080/mcp` in ChatGPT developer settings.
 
 Set these in the `"env"` section of your MCP config:
 
-| Variable | Description |
-|----------|-------------|
-| `AGENTANYCAST_RELAY` | Relay server multiaddr for cross-network P2P. Omit for LAN-only. |
-| `AGENTANYCAST_HOME` | Data directory for daemon state (default: `~/.agentanycast`). |
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `AGENTANYCAST_RELAY` | Relay server multiaddr for cross-network P2P | None (LAN only) |
+| `AGENTANYCAST_HOME` | Data directory for daemon state | `~/.agentanycast` |
 
-Example with relay:
+Example with relay for cross-network communication:
 
 ```json
 {
@@ -250,47 +285,61 @@ agentanycast-mcp [--transport stdio|http] [--port 8080] [--relay MULTIADDR] [--h
 
 CLI arguments take priority over environment variables.
 
-## Available Tools
-
-| Tool | Description |
-|------|-------------|
-| `discover_agents` | Find agents by skill (e.g. "translate", "summarize") |
-| `send_task` | Send an encrypted task to an agent (by PeerID, skill name, or HTTP URL) |
-| `get_task_status` | Check the result of a previously sent task |
-| `get_agent_card` | Get an agent's capability card (name, skills, DID) |
-| `list_connected_peers` | List all connected P2P peers |
-| `get_node_info` | Get this node's PeerID, DID, and status |
-
 ## How It Works
 
 ```
-Your AI Tool (Claude, Cursor, ...)
-    │ MCP (stdio or HTTP)
-    ▼
+Your AI Tool (Claude, Cursor, VS Code, ...)
+    |
+    | MCP protocol (stdio or HTTP)
+    v
 AgentAnycast MCP Server
-    │ gRPC (local)
-    ▼
-AgentAnycast Daemon
-    │ libp2p (TCP/QUIC, Noise encryption, NAT traversal)
-    ▼
+    |
+    | gRPC (Unix domain socket)
+    v
+AgentAnycast Daemon (Go)
+    |
+    | libp2p (TCP/QUIC + Noise_XX encryption + NAT traversal)
+    v
 Remote AI Agents (anywhere in the world)
 ```
 
-- **Zero config**: `uvx agentanycast-mcp` — daemon is auto-managed
-- **Zero API keys**: Agents are identified by cryptographic PeerIDs (Ed25519)
-- **End-to-end encrypted**: Noise_XX protocol. Even relay servers see only ciphertext
-- **NAT traversal**: Works behind firewalls with automatic hole-punching + relay fallback
+- **Zero config** -- `uvx agentanycast-mcp` handles everything. The daemon is auto-downloaded and managed.
+- **Zero API keys** -- agents are identified by cryptographic Peer IDs (Ed25519), not accounts or tokens.
+- **End-to-end encrypted** -- Noise_XX protocol. Even relay servers see only ciphertext.
+- **NAT traversal** -- works behind firewalls with automatic hole-punching and relay fallback.
 
 ## What Makes This Different
 
-This is the only MCP server that connects to a **decentralized peer-to-peer network**. Every other MCP server connects to a specific SaaS API. AgentAnycast connects you to any AI agent, anywhere, with no intermediary that can read your messages.
+This is the only MCP server that connects to a **decentralized peer-to-peer network** of AI agents. Other MCP servers connect to specific SaaS APIs. AgentAnycast connects you to any AI agent, anywhere, with no intermediary that can read your messages.
+
+## Troubleshooting
+
+**Daemon fails to start**
+- Check that port 4001 (TCP) is not in use: `lsof -i :4001`
+- Try a clean state: `rm -rf ~/.agentanycast && uvx agentanycast-mcp`
+
+**No agents found on discover**
+- Agents must be on the same LAN (mDNS) or connected to the same relay
+- Set `AGENTANYCAST_RELAY` to connect across networks
+
+**Connection timeout**
+- Behind a strict firewall? Set a relay address. The relay provides fallback connectivity.
+- Check daemon logs: `cat ~/.agentanycast/daemon.log`
+
+**"uvx" not found**
+- Install uv: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+- Or install directly: `pip install agentanycast-mcp`
+
+**Tool calls failing**
+- Restart your AI tool after adding the MCP config
+- Verify config JSON syntax (no trailing commas)
 
 ## Links
 
-- [AgentAnycast](https://github.com/AgentAnycast/agentanycast) — Main project
-- [Python SDK](https://github.com/AgentAnycast/agentanycast-python) — Build P2P agents
-- [TypeScript SDK](https://github.com/AgentAnycast/agentanycast-ts) — Build P2P agents in JS/TS
+- [AgentAnycast](https://github.com/AgentAnycast/agentanycast) -- Main project, documentation, examples
+- [Python SDK](https://github.com/AgentAnycast/agentanycast-python) -- Build P2P agents in Python
+- [TypeScript SDK](https://github.com/AgentAnycast/agentanycast-ts) -- Build P2P agents in TypeScript
 
 ## License
 
-Apache-2.0
+[Apache License, Version 2.0](LICENSE)
