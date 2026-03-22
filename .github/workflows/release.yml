@@ -26,6 +26,9 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     environment: pypi
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -47,24 +50,29 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     environment: npm
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           registry-url: "https://registry.npmjs.org"
+
+      - name: Upgrade npm for trusted publishing (requires >=11.5.1)
+        run: npm install -g npm@latest
 
       - name: Publish npm wrapper
         working-directory: npm
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   docker:
     name: Publish Docker Image
     needs: test
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 
@@ -92,8 +100,9 @@ jobs:
 
   github-release:
     name: GitHub Release
-    needs: [publish-pypi, publish-npm, docker]
+    needs: test
     runs-on: ubuntu-latest
+    if: always() && needs.test.result == 'success'
     steps:
       - uses: actions/checkout@v4
 

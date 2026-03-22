@@ -3,7 +3,7 @@
   "name": "io.github.agentanycast/agentanycast-mcp",
   "title": "AgentAnycast",
   "description": "P2P agent networking — discover, connect, and communicate with AI agents across any network via encrypted peer-to-peer connections. Zero config, zero API keys.",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "repository": {
     "url": "https://github.com/AgentAnycast/agentanycast-mcp",
     "source": "github"
@@ -12,14 +12,14 @@
     {
       "registryType": "pypi",
       "identifier": "agentanycast-mcp",
-      "version": "0.7.2",
+      "version": "0.7.3",
       "transport": ["stdio"],
       "runtimeHint": "uvx"
     },
     {
       "registryType": "npm",
       "identifier": "agentanycast-mcp",
-      "version": "0.7.2",
+      "version": "0.7.3",
       "transport": ["stdio"],
       "runtimeHint": "npx"
     }
